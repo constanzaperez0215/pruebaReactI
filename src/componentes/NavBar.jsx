@@ -36,8 +36,6 @@ function NavBar() {
           </Nav>
 
 
-            <Buscador />
-
 
         </Navbar.Collapse>
       </Container>

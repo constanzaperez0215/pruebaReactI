@@ -17,14 +17,13 @@
       object-fit: cover;
   }
 
-  .text-overlay {
+  .location {
     position: absolute;
-    top: 50%;
+    top: 1%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.5); /* Ajusta el color y la opacidad del fondo */
-    color: white; /* Color del texto */
-    padding: 20px;
+
+    height: 0px;
     text-align: center;
   }
 
