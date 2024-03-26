@@ -1,0 +1,39 @@
+.logo{
+    width: 300px;
+    height: 100px;
+    margin: 10px;
+    text-align: center;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .image {
+      display: block;
+      height: auto;
+      aspect-ratio: 3/3;
+      object-fit: cover;
+  }
+
+  .text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Ajusta el color y la opacidad del fondo */
+    color: white; /* Color del texto */
+    padding: 20px;
+    text-align: center;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .card {
+    margin: 10px; /* Margen entre las tarjetas */
+  }
