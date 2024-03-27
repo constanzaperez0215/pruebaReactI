@@ -4,8 +4,8 @@ import MiApi from './componentes/MiApi'
 import NavBar from './componentes/NavBar'
 import { Image } from 'react-bootstrap';
 import logo from './assets/logo.png'
-import Footers from './Footer';
-import { useState } from 'react';
+import Footers from './componentes/Footer';
+
 
 
 function App() {
@@ -14,9 +14,10 @@ function App() {
   return (
   <>
     <NavBar />
-    <Image src={logo} alt="logo" className='logo d-flex '/>
+    <div className="logo">
+      <Image src={logo} alt="logo" />
+    </div>
     <MiApi />
-
     <Footers />
   </>
 

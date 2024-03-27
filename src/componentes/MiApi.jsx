@@ -3,15 +3,15 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Buscador from "./Buscador";
+import { Button } from "react-bootstrap";
 
 
 const MiApi = () => {
 
     const [data, setData] = useState([])
     const [search, setSearch]=useState("")
+    const [order, setOrder]= useState("default")
 
     const obtenerDatos = async () => {
         const url = "https://huachitos.cl/api/animales"
@@ -20,10 +20,7 @@ const MiApi = () => {
         setData(data.data)
     }
 
-    const HandleBuscador = (e) =>{
-        const value = e.target.value
-        setSearch(value)
-    }
+
 
 
     useEffect(() => {
@@ -33,42 +30,73 @@ const MiApi = () => {
     const filteredData = data.filter((item) =>
     item.nombre.toLowerCase().includes(search.toLowerCase()) ||
     item.comuna.toLowerCase().includes(search.toLowerCase()) ||
-    item.region.toLowerCase().includes(search.toLowerCase()) ||
     item.tipo.toLowerCase().includes(search.toLowerCase())
 );
 
+    let datosOrdenados = []
+    if(order=="asc"){
+        datosOrdenados=filteredData.sort((a, b)=>{
+            if(a.nombre[0].toLowerCase() < b.nombre[0].toLowerCase()){return -1}
+            if(a.nombre[0].toLowerCase() > b.nombre[0].toLowerCase()){return 1}
+            return(0)
+        })
+    }
+    else if(order=="desc"){
+        datosOrdenados=filteredData.sort((a, b)=>{
+            if(a.nombre[0].toLowerCase() > b.nombre[0].toLowerCase()){return -1}
+            if(a.nombre[0].toLowerCase() < b.nombre[0].toLowerCase()){return 1}
+            return(0)
+        })
+    }
+    else{
+        datosOrdenados=filteredData
+    }
 
-    console.log(data)
+        datosOrdenados.map((e) => {
+        e.desc_personalidad = e.desc_personalidad.replace("<p>", "")
+        e.desc_personalidad = e.desc_personalidad.replace("</p>", "")
+    })
+
 
 
     return (
         <>
-        
-      <Buscador search={search} setSearch={setSearch} setData={setData} obtenerDatos={obtenerDatos} />
+
+      <Buscador search={search} setSearch={setSearch} setData={setData} obtenerDatos={obtenerDatos} order={order} setOrder={setOrder} />
 
         <div className="card-container">
-            {filteredData.map((item, index) => (
-                    <Card className="card mb-3" key={index} style={{ width: '18rem' }}  >
+            {datosOrdenados.map((item, index) => (
+                    <Card className="mb-3" key={index} style={{ width: '22rem' }}  >
                         <div className="image-container">
-                            <ListGroup.Item className="location"><i className="fa-solid fa-location-dot"></i> <strong>{item.comuna}, {item.region}</strong> </ListGroup.Item>
+                            <div className="direccion">
+                                <ListGroup.Item className="location"><i className="fa-solid fa-location-dot"></i> <strong>{item.comuna}, {item.region}</strong> </ListGroup.Item>
+                            </div>
                             <Card.Img className="image" variant="top" key={item.id} src={item.imagen} alt={item.nombre} />
-                            <ListGroup.Item><i className="fa-solid fa-paw"></i>{item.tipo}</ListGroup.Item>
+                            <ListGroup.Item className="tipo"><i className="fa-solid fa-paw"></i> {item.tipo} <i className="fa-solid fa-paw"></i></ListGroup.Item>
                         </div>
+
                         <Card.Body>
-                            <Card.Title>{item.nombre}</Card.Title>
+                            <Card.Title className="titulo">{item.nombre}</Card.Title>
                             <Card.Text>
-                                {item.desc_personalidad.slice(3, -4)}
+                                {`${item.desc_personalidad}`}
                             </Card.Text>
                         </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroup.Item><i className="fa-regular fa-calendar"></i> {item.edad}</ListGroup.Item>
-                            <ListGroup.Item>{item.genero==="macho" ? <i className="fa-solid fa-mars"></i> : <i className="fa-solid fa-venus"></i>} {item.genero}</ListGroup.Item>
-                            <ListGroup.Item>{item.esterilizado==="0" ? <><i className="fa-solid fa-xmark"></i> No esterilizad@ </> : <><i className="fa-solid fa-check"></i> Esterilizad@ </>}</ListGroup.Item>
+
+                        <ListGroup className="list list-group-flush">
+                            <ListGroup.Item className="edad"><i className="fa-regular fa-calendar"></i> {item.edad}</ListGroup.Item>
+
+                            <ListGroup.Item className="genero">{item.genero==="macho" ? <i className="fa-solid fa-mars"></i> : <i className="fa-solid fa-venus"></i>} {item.genero}</ListGroup.Item>
+
+                            <ListGroup.Item className="esterilizado">{item.esterilizado==="0" ? <><i className="fa-solid fa-xmark"></i> No esterilizad@ </> : <><i className="fa-solid fa-check"></i> Esterilizad@ </>}</ListGroup.Item>
                         </ListGroup>
-                        <Card.Body>
-                            <Card.Link href="#">Card Link</Card.Link>
-                            <Card.Link href="#">Another Link</Card.Link>
+
+                        <Card.Body className="btn
+                        ">
+                        <Button variant="secondary" size="md" className="btn">
+                            Contacto
+                          </Button>
                         </Card.Body>
+
                     </Card>
                 ))
             }

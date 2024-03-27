@@ -3,14 +3,14 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Buscador from './Buscador';
+
 
 
 function NavBar() {
   return (
     <Navbar expand="lg" className="bg-success">
       <Container fluid>
-        <Navbar.Brand href="#">Huachitos</Navbar.Brand>
+        <Navbar.Brand href="#"><i className="fa-solid fa-paw"></i></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -21,13 +21,12 @@ function NavBar() {
             <Nav.Link href="#action1">Historia</Nav.Link>
             <Nav.Link href="#action2">Donaciones</Nav.Link>
             <NavDropdown title="Más" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
-                Another action
+                Adopta
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action5">
-                Something else here
+                Apadrina a un Huachito
               </NavDropdown.Item>
             </NavDropdown>
             {/* <Nav.Link href="#" disabled>

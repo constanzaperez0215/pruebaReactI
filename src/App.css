@@ -1,8 +1,9 @@
 .logo{
-    width: 300px;
+    width: auto;
     height: 100px;
-    margin: 10px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+
 }
 
 .image-container {
@@ -22,7 +23,6 @@
     top: 1%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     height: 0px;
     text-align: center;
   }
@@ -33,6 +33,34 @@
     justify-content: space-around;
   }
 
-  .card {
-    margin: 10px; /* Margen entre las tarjetas */
+  .card-container .card{
+    margin: 10px;
+    background-color: rgba(49, 106, 49, 0.797);
+  }
+
+  .tipo{
+    text-align: center;
+    font-size: 25px;
+    ;
+
+  }
+
+  .direccion .location{
+    background-color: black;
+  }
+
+  .card .titulo{
+    font-size: 25px;
+  }
+
+  .list .edad {
+    background-color: rgba(200, 200, 200, 0.76);
+  }
+
+  .list .genero{
+    background-color: rgba(49, 106, 49, 0.797);
+  }
+
+  .list .esterilizado{
+    background-color: rgba(200, 200, 200, 0.76);
   }
